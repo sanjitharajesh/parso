@@ -1,0 +1,188 @@
+{
+  "participants": [
+    "Siri",
+    "Shruthi",
+    "Sanjitha",
+    "Meher"
+  ],
+  "assignments": {
+    "Siri": [
+      {
+        "name": "Shared items (27 items)",
+        "price": 41.0275,
+        "split": true
+      },
+      {
+        "name": "THUMS UP (3 @ $2.49 EACH)",
+        "price": 2.4899999999999998,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "CLAMANTINE 3LB BAG",
+        "price": 0.49666666666666665,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "AMUL BUTTER MILK 1 LT",
+        "price": 0.6633333333333333,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "GAWA FRUIT (1.39 lb @ $4.99/lb)",
+        "price": 2.3133333333333335,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      }
+    ],
+    "Shruthi": [
+      {
+        "name": "Shared items (27 items)",
+        "price": 41.0275,
+        "split": true
+      },
+      {
+        "name": "THUMS UP (3 @ $2.49 EACH)",
+        "price": 2.4899999999999998,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "CLAMANTINE 3LB BAG",
+        "price": 0.49666666666666665,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "AMUL BUTTER MILK 1 LT",
+        "price": 0.6633333333333333,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "GAWA FRUIT (1.39 lb @ $4.99/lb)",
+        "price": 2.3133333333333335,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "BANANA ROLO (1.12 lb @ $1.99/lb)",
+        "price": 1.115,
+        "split": true,
+        "split_with": [
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "DEEP PANEER PARATHA",
+        "price": 4.99,
+        "split": false,
+        "split_with": null
+      }
+    ],
+    "Sanjitha": [
+      {
+        "name": "Shared items (27 items)",
+        "price": 41.0275,
+        "split": true
+      },
+      {
+        "name": "THUMS UP (3 @ $2.49 EACH)",
+        "price": 2.4899999999999998,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "CLAMANTINE 3LB BAG",
+        "price": 0.49666666666666665,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "AMUL BUTTER MILK 1 LT",
+        "price": 0.6633333333333333,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "GAWA FRUIT (1.39 lb @ $4.99/lb)",
+        "price": 2.3133333333333335,
+        "split": true,
+        "split_with": [
+          "Siri",
+          "Shruthi",
+          "Sanjitha"
+        ]
+      },
+      {
+        "name": "BANANA ROLO (1.12 lb @ $1.99/lb)",
+        "price": 1.115,
+        "split": true,
+        "split_with": [
+          "Shruthi",
+          "Sanjitha"
+        ]
+      }
+    ],
+    "Meher": [
+      {
+        "name": "Shared items (27 items)",
+        "price": 41.0275,
+        "split": true
+      }
+    ]
+  },
+  "totals": {
+    "Siri": 46.99083333333334,
+    "Shruthi": 53.095833333333346,
+    "Sanjitha": 48.105833333333344,
+    "Meher": 41.0275
+  }
+}
