@@ -27,28 +27,30 @@ async def get_members(group_id: int):
 async def create_splitwise_expense(request: CreateExpenseRequest):
     """Create expense in Splitwise"""
     try:
-        print("DEBUG: Request received:", request.dict())  # Debug line
-        
-        expense = create_expense(
+        result = create_expense(
             request.group_id,
             request.description,
             request.total,
-            request.user_splits
+            request.user_splits,
+            request.paid_by_user_id
         )
-        
-        print("DEBUG: Splitwise API response:", expense)  # Debug line
-        
-        if expense:
-            return {
-                "success": True,
-                "expense_id": expense['id'],
-                "url": f"https://secure.splitwise.com/expenses/{expense['id']}"
-            }
-        else:
-            raise HTTPException(status_code=500, detail="Failed to create expense")
-            
+
+        return {
+            "success": True,
+            "expense_id": result["expense_id"],
+            "url": result["expense_url"],
+            "message": result["message"]
+        }
+
+    except HTTPException:
+        raise
     except Exception as e:
-        print("DEBUG: Error occurred:", str(e))  # Debug line
         import traceback
-        traceback.print_exc()  # This will print full error
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "message": "Unexpected error creating expense",
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            }
+        )

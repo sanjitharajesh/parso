@@ -1,8 +1,12 @@
 import os
+import json
 import requests
 from dotenv import load_dotenv
+from fastapi import HTTPException
 
 load_dotenv()
+
+SPLITWISE_BASE_URL = "https://secure.splitwise.com/api/v3.0"
 
 def get_current_user():
     """Get current Splitwise user info"""
@@ -43,36 +47,73 @@ def get_group_members(group_id: int):
         return response.json()['group']['members']
     return []
 
-def create_expense(group_id: int, description: str, total: float, user_splits: dict):
-    """Create expense in Splitwise"""
-    api_key = os.getenv("SPLITWISE_API_KEY")
-    
-    users = []
-    for user_id, amount in user_splits.items():
-        users.append({
-            "user_id": int(user_id),
-            "owed_share": str(amount)
-        })
-    
-    expense_data = {
+def create_expense(group_id: int, description: str, total: float,
+                  user_splits: dict, paid_by_user_id: int):
+    """Create expense in Splitwise using form-encoded data"""
+
+    # Splitwise expects form data, not JSON for users array
+    data = {
         "cost": str(total),
         "description": description,
-        "group_id": group_id,
-        "split_equally": False,
-        "users": users
+        "group_id": str(group_id),
+        "split_equally": "false"
     }
-    
-    print("DEBUG: Sending to Splitwise:", expense_data)  # Debug
-    
+
+    # Add users in the format Splitwise expects
+    user_index = 0
+    for user_id_str, amount in user_splits.items():
+        user_id = int(user_id_str)
+
+        data[f"users__{user_index}__user_id"] = str(user_id)
+        data[f"users__{user_index}__owed_share"] = str(amount)
+        data[f"users__{user_index}__paid_share"] = str(total) if user_id == paid_by_user_id else "0.0"
+
+        user_index += 1
+
+    print("=" * 60)
+    print("EXPENSE DATA BEING SENT:")
+    for key, value in data.items():
+        print(f"  {key}: {value}")
+    print("=" * 60)
+
     response = requests.post(
-        "https://secure.splitwise.com/api/v3.0/create_expense",
-        headers={"Authorization": f"Bearer {api_key}"},
-        json=expense_data
+        f"{SPLITWISE_BASE_URL}/create_expense",
+        headers={
+            "Authorization": f"Bearer {os.getenv('SPLITWISE_API_KEY')}",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data=data
     )
-    
-    print("DEBUG: Splitwise status code:", response.status_code)  # Debug
-    print("DEBUG: Splitwise response:", response.json())  # Debug
-    
-    if response.status_code == 200:
-        return response.json()['expenses'][0]
-    return None
+
+    print(f"Response Status: {response.status_code}")
+    print(f"Response Body: {response.text}")
+    print("=" * 60)
+
+    if response.status_code not in [200, 201]:
+        result = response.json()
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "message": "Splitwise API rejected the request",
+                "status_code": response.status_code,
+                "errors": result.get("errors", result)
+            }
+        )
+
+    result = response.json()
+
+    if "expenses" in result and len(result["expenses"]) > 0:
+        expense = result["expenses"][0]
+    elif "expense" in result:
+        expense = result["expense"]
+    else:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unexpected response format: {result}"
+        )
+
+    return {
+        "expense_id": expense.get("id"),
+        "expense_url": f"https://www.splitwise.com/expenses/{expense.get('id')}",
+        "message": "Expense created successfully"
+    }

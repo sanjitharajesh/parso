@@ -42,3 +42,8 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# Frontend
+node_modules/
+.next/
+frontend/.env.local

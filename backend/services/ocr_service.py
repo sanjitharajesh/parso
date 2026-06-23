@@ -1,5 +1,6 @@
 import os
 import requests
+from pathlib import Path
 from dotenv import load_dotenv
 from PIL import Image
 from pillow_heif import register_heif_opener
@@ -7,27 +8,29 @@ from pillow_heif import register_heif_opener
 load_dotenv()
 register_heif_opener()
 
+_BACKEND_DIR = Path(__file__).resolve().parent.parent
+CONVERTED_DIR = _BACKEND_DIR / "converted"
+CONVERTED_DIR.mkdir(exist_ok=True)
+
 def extract_receipt_text(image_path):
     """Extract text from receipt using Azure Computer Vision OCR"""
-    
+
     endpoint = os.getenv("AZURE_VISION_ENDPOINT")
     key = os.getenv("AZURE_VISION_KEY")
-    
+
     url = f"{endpoint}/vision/v3.2/ocr"
-    
+
     headers = {
         'Ocp-Apim-Subscription-Key': key,
         'Content-Type': 'application/octet-stream'
     }
-    
+
     # Convert HEIC to JPEG if needed
     converted_path = None
     if image_path.lower().endswith('.heic'):
         img = Image.open(image_path)
-        converted_dir = "converted"
-        os.makedirs(converted_dir, exist_ok=True)
-        filename = os.path.basename(image_path).rsplit('.', 1)[0] + '.jpg'
-        converted_path = os.path.join(converted_dir, filename)
+        filename = Path(image_path).stem + '.jpg'
+        converted_path = str(CONVERTED_DIR / filename)
         img.convert('RGB').save(converted_path, 'JPEG')
         image_path = converted_path
     

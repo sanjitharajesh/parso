@@ -38,6 +38,7 @@ Return ONLY valid JSON, no other text."""
     response = client.chat.completions.create(
         model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
         messages=[{"role": "user", "content": prompt}],
+        response_format={"type": "json_object"},
         temperature=0,
         max_tokens=2000
     )

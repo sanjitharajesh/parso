@@ -44,3 +44,4 @@ class CreateExpenseRequest(BaseModel):
     description: str
     total: float
     user_splits: Dict[int, float]
+    paid_by_user_id: int
