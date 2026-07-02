@@ -17,7 +17,7 @@ function SuccessContent() {
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-xl font-bold text-gray-900 flex items-center justify-center gap-1 mb-8">
-            💰 BillBuddy
+            💰 Parso
           </h1>
 
           {/* Success Icon */}

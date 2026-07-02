@@ -151,7 +151,7 @@ export default function AssignPage() {
     try {
       const result = await createExpense({
         group_id: selectedGroupId!,
-        description: receipt.store_name || 'Receipt split via BillBuddy',
+        description: receipt.store_name || 'Receipt split via Parso',
         total,
         user_splits: userSplits,
         paid_by_user_id: paidByUserId!,
@@ -179,7 +179,7 @@ export default function AssignPage() {
             ← Back
           </Link>
           <h1 className="text-xl font-bold text-gray-900 flex items-center gap-1">
-            💰 BillBuddy
+            💰 Parso
           </h1>
         </div>
 

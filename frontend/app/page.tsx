@@ -76,7 +76,7 @@ export default function UploadPage() {
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-3xl font-bold text-gray-900 flex items-center justify-center gap-2">
-            <span>💰</span> BillBuddy
+            <span>💰</span> Parso
           </h1>
           <p className="mt-2 text-gray-500 text-lg">Split bills instantly with AI</p>
         </div>

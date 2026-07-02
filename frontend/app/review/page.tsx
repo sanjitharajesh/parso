@@ -83,7 +83,7 @@ export default function ReviewPage() {
             ← Back
           </Link>
           <h1 className="text-xl font-bold text-gray-900 flex items-center gap-1">
-            💰 BillBuddy
+            💰 Parso
           </h1>
         </div>
 

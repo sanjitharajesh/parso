@@ -6,7 +6,7 @@ import { ReceiptProvider } from '@/contexts/ReceiptContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'BillBuddy - Split Bills Instantly',
+  title: 'Parso - Split Bills Instantly',
   description: 'Split receipts with friends using AI-powered parsing and Splitwise integration',
 };
 
