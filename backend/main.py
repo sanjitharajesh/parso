@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import receipts, splits, splitwise_router
 
-app = FastAPI(title="BillBuddy API", version="1.0.0")
+app = FastAPI(title="Parso API", version="1.0.0")
 
 _origins_env = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
 allowed_origins = [o.strip() for o in _origins_env.split(",") if o.strip()]

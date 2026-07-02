@@ -6,7 +6,6 @@ from pathlib import Path
 from services.ocr_service import extract_receipt_text
 from services.parser_service import parse_receipt
 from models.schemas import ParsedReceipt
-import json
 
 router = APIRouter()
 
@@ -36,15 +35,10 @@ async def upload_receipts(files: List[UploadFile] = File(...)):
         
         combined_text = "\n\n--- NEXT IMAGE ---\n\n".join(all_text)
         
-        parsed_json = parse_receipt(combined_text)
-
         try:
-            data = json.loads(parsed_json)
-        except (json.JSONDecodeError, TypeError):
-            raise HTTPException(
-                status_code=422,
-                detail="Failed to parse receipt data, please try again"
-            )
+            data = parse_receipt(combined_text)
+        except ValueError as e:
+            raise HTTPException(status_code=422, detail=str(e))
 
         for path in saved_paths:
             if os.path.exists(path):
